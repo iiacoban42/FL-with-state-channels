@@ -1,0 +1,31 @@
+alias: peer_53
+mnemonic: pistol kiwi shrug future ozone ostrich match remove crucial oblige cream
+  critic
+accountIndex: 53
+channel:
+  timeout: 30s
+  fundtimeout: 30s
+  settleTimeout: 30s
+  challengeDurationSec: 60
+node:
+  ip: 0.0.0.0
+  port: 5803
+  dialTimeout: 30s
+  handleTimeout: 30s
+  reconnectTimeout: 20s
+  persistencePath: /tmp/peer_53
+  apiPort: 8134
+chain:
+  url: ws://127.0.0.1:8545
+  contractsetup: validate
+  adjudicator: 0x079557d7549d7D44F4b00b51d2C532674129ed51
+  assetholder: 0x923439be515b6a928cb9650d70000a9044e49e85
+  app: 0xe72d67D4d7CB437D086445Be955385dD520Bfe11
+  txTimeout: 30s
+  txFinalityDepth: 3
+  ID: 1337
+log:
+  level: warn
+  file: logs/peer_53.log
+walletPath: /tmp/peer_53_wallet
+secretKey: 0x1af9b8e22c4dc0250ebd06962d4e2cd9c3045d45ad328d19cdf47c722d778bad

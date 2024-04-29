@@ -10,11 +10,11 @@
   <a href="https://github.com/perun-network/perun-eth-demo/actions"><img src="https://github.com/perun-network/perun-eth-demo/workflows/Testing/badge.svg" alt="CI Testing status"></a>
 </p>
 
-_perun-eth-demo_ allows you to interact with [perun](https://perun.network/) Payment-Channels over a CLI powered by [go-perun](https://github.com/perun-network/go-perun).  
+_perun-eth-demo_ allows you to interact with [perun](https://perun.network/) Payment-Channels over a CLI powered by [go-perun](https://github.com/perun-network/go-perun).
 You can open a Payment-Channel, send off-chain payments and close it, whereby all interaction with the Ethereum blockchain is handled by _go-perun_. Give it a try and be amazed by [Perun Network](https://perun.network/) :rocket: :moon: !
 
 ## Security Disclaimer
-The authors take no responsibility for any loss of digital assets or other damage caused by the use of this software.  
+The authors take no responsibility for any loss of digital assets or other damage caused by the use of this software.
 **Do not use this software with real funds**.
 
 ## Getting Started
@@ -28,6 +28,19 @@ cd perun-eth-demo
 go build
 # Check that the binary works
 ./perun-eth-demo
+```
+
+## Smart Contract Compilation
+
+Install the solidity compiler:
+```
+sudo npm i -g solc@0.7.6
+```
+
+To compile the smart contracts and generate the go bindings, run:
+```
+solcjs FL.sol --abi --base-path ./ -o abi --bin --optimize
+abigen --pkg FLApp --abi abi/FL_sol_FLApp.abi --bin abi/FL_sol_FLApp.bin --out ./generated/FLApp/FLApp.go
 ```
 
 ## Demo

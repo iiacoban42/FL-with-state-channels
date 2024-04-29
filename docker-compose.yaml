@@ -1,0 +1,48 @@
+version: '3'
+services:
+  ganache:
+    container_name: ganache
+    image: trufflesuite/ganache-cli:latest
+    command: ganache-cli -m "pistol kiwi shrug future ozone ostrich match remove crucial
+      oblige cream critic" --block-time 5 -e 1000 --gasLimit=9000000000000000
+    ports:
+    - 8545:8545
+    networks:
+      perun-net:
+        ipv4_address: 172.18.0.2
+  peer_0:
+    container_name: peer_0
+    hostname: peer_0
+    build: .
+    tty: true
+    command: sh -c "./wait-for-it.sh ganache:8545 &&./app-channel demo --config config/peer_0.yaml"
+    ports:
+    - 5750:5750
+    restart: unless-stopped
+    depends_on:
+    - ganache
+    networks:
+      perun-net:
+        ipv4_address: 172.18.0.3
+  peer_1:
+    container_name: peer_1
+    hostname: peer_1
+    build: .
+    tty: true
+    command: sh -c "./wait-for-it.sh ganache:8545 &&./app-channel demo --config config/peer_1.yaml"
+    ports:
+    - 5751:5751
+    restart: unless-stopped
+    depends_on:
+    - ganache
+    networks:
+      perun-net:
+        ipv4_address: 172.18.0.4
+networks:
+  perun-net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: perun-bridge
+    ipam:
+      config:
+      - subnet: 172.18.0.0/16
